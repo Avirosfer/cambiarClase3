@@ -1,14 +1,15 @@
 
 <?php
 
-    include 'conexion.php';
 
+    include 'conexion.php';
 
    $sentencia = $bd->query("SELECT * FROM pacientes;");
    $registros = $sentencia->fetchall(PDO::FETCH_OBJ);
 
    $consulta = $bd->query("SELECT * FROM propietarios;");
    $resultados = $consulta->fetchall(PDO::FETCH_OBJ);
+
 
 ?>
 
@@ -73,7 +74,6 @@
 
                                     </div>
 
-
                                             <div class="contenedor-infopaciente-vis-pac">   
 
                                                         <div class="contenedor-imagen flex">
@@ -98,103 +98,83 @@
 
                                                             <label>Especie:</label>
 
-                                                            <select class="selector" name="espPac" id="espSel">
-                                                                <?php
+                                                            <select class="selector"  name="espPac" id="espSel" onchange="myEspecie()">
+                                                                <?php        
+                                                                            
+                                                                            /*$sql = 'SELECT lisEsp FROM especie';*/
+                                                                            /*$sql = 'SELECT E.idEsp, E.lisEsp FROM especie E INNER JOIN raza R ON R.idEsp = R.idEsp ORDER BY E.lisEsp, R.lisRaza';
+                                                                            $stmt = $bd->prepare($sql);
+                                                                            $stmt->execute();
+                                                                            $results=$stmt->fetchAll();
 
-                                                                    $mysqli =mysqli_connect("localhost", "root", "", "vetpetsoft");
-                                                                    $results = mysqli_query($mysqli,"SELECT * FROM especie"); 
-
-                                                                    while ($row = $results->fetch_assoc()):
-                                                                        $idEspecie = $row['idEsp'];
-                                                                        $especie = $row['lisEsp'];
-                                                                        echo "<option value=$idEspecie>$especie</option>";
-                                                                    endwhile
+                                                                            foreach ($results as $output){?>
+                                                                            <option value="<?php echo $output['lisEsp']; ?> "><?php echo $output["lisEsp"];?></option>
+                                                                            <?php } */  
 
                                                                 ?>
-
                                                             </select>
 
                                                         </div>
                                                         <div class="campo1">
-                                                            <form action="" method="post">
+                                                            
                                                                 <label>Raza:</label>
+
                                                                 <select class="selector" name="razPac" id="razSel">
                                                                     <?php
-
-                                                                            $mysqli =mysqli_connect("localhost", "root", "", "vetpetsoft");
-                                                                            $results = mysqli_query($mysqli,"SELECT * FROM razacanino");
-                                                                            $resul = mysqli_query($mysqli,"SELECT * FROM razafelino");
-                    
-                                                                            if ($idEspecie == 1){
-                                                                                    while ($row = $results->fetch_assoc()):
-                                                                                        $idRazCan = $row['idCan'];
-                                                                                        $razCan = $row['lisCan'];
-                                                                                        echo "<option value=$idRazCan>$razCan</option>";
-                                                                                    endwhile;
-
-                                                                            }else{
-
-                                                                                    while ($row = $resul->fetch_assoc()):
-                                                                                        $idRazFel = $row['idFel'];
-                                                                                        $razFel = $row['lisFel'];
-                                                                                        echo "<option value=$idRazFel>$razFel</option>";
-                                                                                    endwhile;
-
-                                                                                }
-
+                                                                            
+                                                                            $sql = 'SELECT E.idEsp, E.lisEsp FROM especie E INNER JOIN raza R ON E.idEsp = R.idEsp ORDER BY E.lisEsp, R.lisRaza';
+                                                                            $stmt = $bd->prepare($sql);
+                                                                            $stmt->execute();
+                                                                            $results=$stmt->fetchAll();
+                                                                            
+                                                                            foreach ($results as $output){?>
+                                                                            <option value="<?php echo $output['lisRaza']; ?> "><?php echo $output["lisRaza"];?></option>
+                                                                            <?php }
+                                                                            
                                                                     ?>
                                                                 </select>
-                                                            </form>
+                                                            
                                                         </div>
                                                         <div class="campo1">
+
                                                             <label>Sexo:</label>
+
                                                             <select class="selector" name="sexPac" id="sexSel">
+                                                                
                                                                 <?php
-                                                                /*
-                                                                    $mysqli =mysqli_connect("localhost", "root", "", "vetpetsoft");
-                                                                    $results = mysqli_query($mysqli,"SELECT * FROM sexo");           
-
-                                                                    while ($row = $results->fetch_assoc()):
-                                                                        $idSex = $row['idSexo'];
-                                                                        $sexo = $row['lisSex'];
-                                                                        echo "<option value=$idSex>$sexo</option>";
-                                                                    endwhile
-                                                                */
-                                                                        $pdo = require 'conexion.php';
-
-                                                                        $sql = 'SELECT idSexo, lisSex 
-                                                                                FROM sexo
-                                                                                WHERE idSexo> :';
-
-                                                                        $statement = $pdo->query($sql);
-
-                                                                        $sexo = $statement->fetchAll(PDO::FETCH_ASSOC);
-
-                                                                        foreach ($sexSel as $sexo){
-                                                                            echo $sexo['lisSex'];
-                                                                        }
-
+                                                                        $sql = 'SELECT lisSex FROM sexo';
+                                                                        $stmt = $bd->prepare($sql);
+                                                                        $stmt->execute();
+                                                                        $results=$stmt->fetchAll();
+                                                                        
+                                                                        foreach ($results as $output){?>
+                                                                        <option value="<?php echo $output['lisSex']; ?> "> <?php echo $output["lisSex"];?></option>
+                                                                        <?php }    
                                                                 ?>
 
                                                             </select>
                                                         </div>
                                                         <div class="campo1">
                                                             <label>Fecha de Nacimiento:</label>
-                                                            <input class="input-text" type="date" name="fecNam" value="">
+                                                            <input class="input-text" type="date" name="fecNam" >
                                                         </div>
+
                                                         <div class="campo1">
+
                                                             <label>Color:</label>
-                                                            <select class="selector" name="colPac" id="sexSel">
+
+                                                            <select class="selector" name="colPac" id="colSel" >
+
                                                                 <?php
 
-                                                                    $mysqli =mysqli_connect("localhost", "root", "", "vetpetsoft");
-                                                                    $results = mysqli_query($mysqli,"SELECT * FROM color");           
-
-                                                                    while ($row = $results->fetch_assoc()):
-                                                                        $idColor = $row['idCol'];
-                                                                        $color = $row['lisCol'];
-                                                                        echo "<option value=$idColor>$color</option>";
-                                                                    endwhile
+                                                                     $sql = 'SELECT lisCol FROM color';
+                                                                        $stmt = $bd->prepare($sql);
+                                                                        $stmt->execute();
+                                                                        $results=$stmt->fetchAll();
+                                                                        
+                                                                        foreach ($results as $output){?>
+                                                                        <option value="<?php echo $output['lisCol']; ?> "><?php echo $output["lisCol"];?></option>
+                                                                        <?php } 
 
                                                                 ?>
 

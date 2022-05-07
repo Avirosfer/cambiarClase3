@@ -200,7 +200,7 @@
 
                                                 
                                                     <div class="btn2">
-                                                        <input type="hidden" name="oculto">
+                                                        <input class="input-text" type="hidden" name="oculto" value="1">
                                                         <input type="hidden" name= "hisCli2" value="<?php echo $registro->hisCli;  ?>">
                                                         <input type="hidden" name= "hisCli3" value="<?php echo $register->hisCli;  ?>">
                                                         <button type="submit" id="guardarEdit">Guardar</button>

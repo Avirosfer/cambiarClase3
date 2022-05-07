@@ -1,6 +1,6 @@
 <?php
    
-    $clave="";
+    $clave="Rokuro800520649";
     $user = "root";
     $basedts="vetpetsoft";
 
@@ -21,9 +21,6 @@
                           <path d="M6.343 12.343a8 8 0 0 1 11.314 0" />
                           <path d="M3.515 9.515c4.686 -4.687 12.284 -4.687 17 0" />
                     </svg>
-
-                
-
 
         EOT;
 
