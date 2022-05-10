@@ -255,7 +255,37 @@ $(document).ready(function (){
 });
 /* Finaliza Popup ventana emergente REPORTES.*/
 
-/* Funcion myEspecie()*/
+$(document).ready(function () {
+
+	$('#espPac').change(function() {
+		loadRaza($(this).find(':selected').val())
+	})
+});
+
+function loadEspecie(){
+	$.ajax({
+		type: "POST",
+		url: "ajax.php",
+		data: "get=lisEsp"
+	}).done(function(result){
+		$(result).each(function() {
+			$("#espPac").append($(result));
+		})
+	});
+
+}
+
+function loadRaza(idEsp){
+	$("#razPac").children().remove()
+	$.ajax({
+		type: "POST",
+		url: "ajax.php",
+		data: "get=lisRaz&idEsp="+ idEsp
+	}).done(function(result){
+		$("#razPac").append($(result));
+	});
+
+}
 
 
 

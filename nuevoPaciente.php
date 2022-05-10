@@ -30,7 +30,7 @@
     <link rel="stylesheet" href="css/onOff.css">
     <script src="js/html2pdf.bundle.min.js"></script>
     <script src="js/convertirPDF.js"></script>
-    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <script src="js/main.js"></script>
@@ -155,32 +155,8 @@
                                                                 <select class="selector" name="razPac" id="razPac"> </select>
                                                                 <script type="application/javascript">
                                                                   
-                                                                        
-                                                                            document.getElementById('espPac').addEventListener('change', function(e) {
-                                                                                var xhttp = new XMLHttpRequest();
-
-                                                                                xhttp.onreadystatechange = function(){
-
-                                                                                    if (this.readyState == 4 && this.status == 200){
-                                                                                            let ownRazas = JSON.parse(this.responseText);
-
-                                                                                            let razaDropdown = document.getElementById('razaPac');
-                                                                                            razaDropdown.innerText = null;
-
-                                                                                            ownRazas.forEach(function (c){
-                                                                                                var option = document.createElement('option');
-                                                                                                option.text = c.name;
-                                                                                                option.value = c.id;
-                                                                                                razaDropdown.appendChild(option);
-                                                                                            });
-                                                                                    }
-
-                                                                                };
-
-
-                                                                                xhttp.open("GET", "get_cities.php?")
-                                                                            });
-                                                                    
+                                                        
+                                                                           
                                                                 </script>
                                                                
                                                             
