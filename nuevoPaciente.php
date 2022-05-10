@@ -98,7 +98,8 @@
 
                                                             <label>Especie:</label>
 
-                                                            <select class="selector"  name="espPac" id="espSel" onchange="myEspecie()">
+                                                            <select class="selector" name="espPac" id="espPac">
+                                                            <option value="-1"></option>
                                                                 <?php        
                                                                             
                                                                             /*$sql = 'SELECT lisEsp FROM especie';*/
@@ -111,6 +112,39 @@
                                                                             <option value="<?php echo $output['lisEsp']; ?> "><?php echo $output["lisEsp"];?></option>
                                                                             <?php } */  
 
+                                                                            /*$sql = 'SELECT E.idEsp AS EspecieID, E.lisEsp AS EspecieList FROM especie E INNER JOIN raza R ON R.idEsp = R.idEsp ORDER BY E.lisEsp, R.lisRaza';
+                                                                            
+                                                                            try{
+                                                                                $data = $bd->query($sql)->fetchAll(PDO::FETCH_ASSOC);
+                                                                            }catch (PDOException $exception){
+                                                                                die($exception->getMessage());
+                                                                            }
+
+                                                                            $specieList = array_unique(array_column($data, 'EspecieList'));
+                                                                            $specieId = array_unique(array_column($data, 'EspecieID'));
+
+                                                                            foreach($specieList as $k => $listaEsp){
+                                                                                ?>
+
+                                                                                <option value="<?php echo $specieId[$k]; ?>"><?php echo $listaEsp; ?></option>
+
+                                                                                <?php
+
+                                                                            }
+                                                                        */
+
+                                                                        $sql = 'SELECT E.idEsp AS EspecieID, E.lisEsp AS EspecieList FROM especie E ORDER BY E.lisEsp';
+                                                                            
+                                                                            try{
+                                                                                $data = $bd->query($sql)->fetchAll(PDO::FETCH_ASSOC);
+                                                                            }catch (PDOException $exception){
+                                                                                die($exception->getMessage());
+                                                                            }
+
+                                                                            foreach ($data as $especie){?>
+                                                                                <option value="<?php echo $especie['EspecieID']; ?>"><?php echo $especie["EspecieList"];?></option>
+                                                                                <?php }
+
                                                                 ?>
                                                             </select>
 
@@ -118,28 +152,44 @@
                                                         <div class="campo1">
                                                             
                                                                 <label>Raza:</label>
+                                                                <select class="selector" name="razPac" id="razPac"> </select>
+                                                                <script type="application/javascript">
+                                                                  
+                                                                        
+                                                                            document.getElementById('espPac').addEventListener('change', function(e) {
+                                                                                var xhttp = new XMLHttpRequest();
 
-                                                                <select class="selector" name="razPac" id="razSel">
-                                                                    <?php
-                                                                            
-                                                                            $sql = 'SELECT E.idEsp, E.lisEsp FROM especie E INNER JOIN raza R ON E.idEsp = R.idEsp ORDER BY E.lisEsp, R.lisRaza';
-                                                                            $stmt = $bd->prepare($sql);
-                                                                            $stmt->execute();
-                                                                            $results=$stmt->fetchAll();
-                                                                            
-                                                                            foreach ($results as $output){?>
-                                                                            <option value="<?php echo $output['lisRaza']; ?> "><?php echo $output["lisRaza"];?></option>
-                                                                            <?php }
-                                                                            
-                                                                    ?>
-                                                                </select>
+                                                                                xhttp.onreadystatechange = function(){
+
+                                                                                    if (this.readyState == 4 && this.status == 200){
+                                                                                            let ownRazas = JSON.parse(this.responseText);
+
+                                                                                            let razaDropdown = document.getElementById('razaPac');
+                                                                                            razaDropdown.innerText = null;
+
+                                                                                            ownRazas.forEach(function (c){
+                                                                                                var option = document.createElement('option');
+                                                                                                option.text = c.name;
+                                                                                                option.value = c.id;
+                                                                                                razaDropdown.appendChild(option);
+                                                                                            });
+                                                                                    }
+
+                                                                                };
+
+
+                                                                                xhttp.open("GET", "get_cities.php?")
+                                                                            });
+                                                                    
+                                                                </script>
+                                                               
                                                             
                                                         </div>
                                                         <div class="campo1">
 
                                                             <label>Sexo:</label>
 
-                                                            <select class="selector" name="sexPac" id="sexSel">
+                                                            <select class="selector" name="sexPac" id="sexPac">
                                                                 
                                                                 <?php
                                                                         $sql = 'SELECT lisSex FROM sexo';

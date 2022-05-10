@@ -257,20 +257,5 @@ $(document).ready(function (){
 
 /* Funcion myEspecie()*/
 
-function myEspecie(){
 
-	var specie = document.getElementById("espSel").value;
-
-	$.ajax({
-		url:"searchPin.php",
-		type:"POST",
-		data:{
-			id:specie
-		},
-		success:function(data){
-			$('#razSel').html(data);
-		}
-	})
-
-}
 
