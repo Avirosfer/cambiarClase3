@@ -196,6 +196,7 @@ $registros = $sentencia->fetchall(PDO::FETCH_OBJ);
                                  
                      </div>
 
+
              </div>
 
          </div>
@@ -309,82 +310,85 @@ $registros = $sentencia->fetchall(PDO::FETCH_OBJ);
 <h3>Pacientes</h3>
 
 <div>
+<form action="exportExcel.php" method="post" id="convert_form">
+        <table class="tabla" id="tblData">
 
- <table class="tabla" id="tblData">
+            <tr class="primaFila"><!--fila-->
+                    <th class="historia">Historia Clínica</th><!--columna-->
+                    <th class="nombre">Nombre</th><!--columna-->
+                    <th class="sexo">Sexo</th><!--columna-->
+                    <th class="especie">Especie</th><!--columna-->
+                    <th class="raza">Raza</th><!--columna-->
+                    <th class="ultAtencion">Fecha Ultima Atención</th><!--columna-->
+                    <th class="propietario">Propietario</th><!--columna-->
+                    <th class="observaciones">Observaciones</th><!--columna-->
+                    <th class="acciones">Acciones</th><!--columna--> 
+            </tr>
 
-     <tr class="primaFila"><!--fila-->
-              <th class="historia">Historia Clínica</th><!--columna-->
-              <th class="nombre">Nombre</th><!--columna-->
-              <th class="sexo">Sexo</th><!--columna-->
-              <th class="especie">Especie</th><!--columna-->
-              <th class="raza">Raza</th><!--columna-->
-              <th class="ultAtencion">Fecha Ultima Atención</th><!--columna-->
-              <th class="propietario">Propietario</th><!--columna-->
-              <th class="observaciones">Observaciones</th><!--columna-->
-              <th class="acciones">Acciones</th><!--columna--> 
-     </tr>
+            <?php
+                foreach ($registros as $dato) { ?>
 
-     <?php
-         foreach ($registros as $dato) { ?>
+                    <tr class="fila"><!--fila-->
+                        <td name="tdHistoria"><?php echo $dato->hisCli; ?></td><!--columna-->
+                        <td name="tdNombre"><?php echo $dato->nomPac; ?></td><!--columna-->
+                        <td name="tdSexo"><?php echo $dato->sexPac; ?></td><!--columna-->
+                        <td name="tdEspecie"><?php echo $dato->espPac; ?></td><!--columna-->
+                        <td name="tdRaza"><?php echo $dato->razPac; ?></td><!--columna-->
+                        <td name="tdUltAtencion"><?php echo $dato->ultAte; ?></td><!--columna-->
+                        <td name="tdPropietario"><?php echo $dato->proPac; ?></td><!--columna-->
+                        <td name="tdObservaciones"><?php echo $dato->obsPac; ?></td><!--columna-->
+                        <td name="tdAcciones" class="contenedor-acciones">
+                        
 
-             <tr class="fila"><!--fila-->
-                  <td name="tdHistoria"><?php echo $dato->hisCli; ?></td><!--columna-->
-                  <td name="tdNombre"><?php echo $dato->nomPac; ?></td><!--columna-->
-                  <td name="tdSexo"><?php echo $dato->sexPac; ?></td><!--columna-->
-                  <td name="tdEspecie"><?php echo $dato->espPac; ?></td><!--columna-->
-                  <td name="tdRaza"><?php echo $dato->razPac; ?></td><!--columna-->
-                  <td name="tdUltAtencion"><?php echo $dato->ultAte; ?></td><!--columna-->
-                  <td name="tdPropietario"><?php echo $dato->proPac; ?></td><!--columna-->
-                  <td name="tdObservaciones"><?php echo $dato->obsPac; ?></td><!--columna-->
-                  <td name="tdAcciones" class="contenedor-acciones">
-                  <input type="hidden" name="oculto" value="1">
+                            <form action="" method="POST">
 
-                     <form action="" method="POST">
+                                <a href="visualizarPaciente.php?hisCli=<?php echo $dato->hisCli;?>">
 
-                         <a href="visualizarPaciente.php?hisCli=<?php echo $dato->hisCli;?>">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-eye-pac" width="20" height="20" viewBox="0 0 24 24" stroke-width="1.5" stroke="#0D4251" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                        <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                                        <circle cx="12" cy="12" r="2" />
+                                        <path d="M22 12c-2.667 4.667 -6 7 -10 7s-7.333 -2.333 -10 -7c2.667 -4.667 6 -7 10 -7s7.333 2.333 10 7" />
+                                    </svg>
 
-                             <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-eye-pac" width="20" height="20" viewBox="0 0 24 24" stroke-width="1.5" stroke="#0D4251" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                                   <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
-                                   <circle cx="12" cy="12" r="2" />
-                                   <path d="M22 12c-2.667 4.667 -6 7 -10 7s-7.333 -2.333 -10 -7c2.667 -4.667 6 -7 10 -7s7.333 2.333 10 7" />
-                             </svg>
+                                </a>
 
-                         </a>
+                            </form>
 
-                     </form>
+                            <form action="" method="POST">
 
-                     <form action="" method="POST">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-pencil-pac" width="20" height="20" viewBox="0 0 24 24" stroke-width="1.5" stroke="#0D4251" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                        <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                                        <path d="M4 20h4l10.5 -10.5a1.5 1.5 0 0 0 -4 -4l-10.5 10.5v4" />
+                                        <line x1="13.5" y1="6.5" x2="17.5" y2="10.5" />
+                                    </svg>
 
-                             <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-pencil-pac" width="20" height="20" viewBox="0 0 24 24" stroke-width="1.5" stroke="#0D4251" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                                   <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
-                                   <path d="M4 20h4l10.5 -10.5a1.5 1.5 0 0 0 -4 -4l-10.5 10.5v4" />
-                                   <line x1="13.5" y1="6.5" x2="17.5" y2="10.5" />
-                             </svg>
+                            </form>
 
-                     </form>
-
-                     <div class="switch-button">
-                         <!-- Checkbox -->
-                         <input type="checkbox" name="switch-button"  id="switch-label" class="switch-button__checkbox">
-                         <!-- Botón -->
-                         <label for="switch-label" class="switch-button__label"></label>
-                     </div>
+                            <div class="switch-button">
+                                <!-- Checkbox -->
+                                <input type="checkbox" name="switch-button"  id="switch-label" class="switch-button__checkbox">
+                                <!-- Botón -->
+                                <label for="switch-label" class="switch-button__label"></label>
+                            </div>
 
 
-                     <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-circle-plus-pac" width="20" height="20" viewBox="0 0 24 24" stroke-width="1.5" stroke="#0D4251" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                           <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
-                           <circle cx="12" cy="12" r="9" />
-                           <line x1="9" y1="12" x2="15" y2="12" />
-                           <line x1="12" y1="9" x2="12" y2="15" />
-                     </svg>
-                 </td><!--columna-->
-             </tr>
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-circle-plus-pac" width="20" height="20" viewBox="0 0 24 24" stroke-width="1.5" stroke="#0D4251" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                                <circle cx="12" cy="12" r="9" />
+                                <line x1="9" y1="12" x2="15" y2="12" />
+                                <line x1="12" y1="9" x2="12" y2="15" />
+                            </svg>
+                        </td><!--columna-->
+                    </tr>
 
-             <?php
-         }
-     ?>
-     
- </table>
+                    <?php
+                }
+            ?>
+            
+        </table>
+</form>
+
+ <input type="hidden" name="oculto" id="oculto" value="1">
 
 </div>
 
@@ -395,18 +399,18 @@ $registros = $sentencia->fetchall(PDO::FETCH_OBJ);
                      <div class="contenedor-reportes-btns">
 
                               <form action="reporteExcel.php" method="POST">
+
+                                    <input type="date" name="fecha1">
+                                    <input type="date" name="fecha2">
                                      <div class="btn2">
-                                             <button type="submit" id="btnCrearExcel">Excel</button>
+                                             <button type="submit" id="btnCrearExcel" name="generarRporte">Excel</button>
                                      </div>
                              </form>
 
-                             <form action="">
-
-                                     <div class="btn2">
-                                             <button type="submit" id="btnCrearPdfReportes">PDF</button>
-                                     </div>
-                            </form>
-                                         
+                            <div class="btn2">
+                                    <button type="submit" id="btnCrearPdfReportes">PDF</button>
+                            </div>
+                                        
                      </div>
 
 

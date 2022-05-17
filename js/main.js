@@ -273,4 +273,16 @@ $(document).ready(function() {
 
 /*Finaliza el selector de razas*/
 
+/* Convertir de HTML a Excel*/
+
+$(document).ready(function() {
+	$('#btnCrearExcel').click(function() {
+		var table_content = '<table>';
+		table_content += $('#tblData').html();
+		table_content += '</table>';
+		$('#oculto').val(table_content);
+		$('#convert_form').html();
+	});
+})
+
 

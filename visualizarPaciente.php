@@ -36,6 +36,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <script src="js/main.js"></script>
+   
     <style>
         input:focus {
         outline: 2px;
@@ -44,8 +45,9 @@
         border-radius: 15px;
         }
 
-        th,td,p,div,b {margin:0;padding:0}
-        html{margin:10px 10px}
+    </style>
+    <style>
+        @page { margin: 0; }
     </style>
     
 </head>

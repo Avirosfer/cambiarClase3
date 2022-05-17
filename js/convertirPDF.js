@@ -13,7 +13,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     quality: 1
                 },
                 html2canvas: {
-                    scale: 1, // A mayor escala, mejores gráficos, pero más peso
+                    scale: 10, // A mayor escala, mejores gráficos, pero más peso
                     letterRendering: true,
                 },
                 jsPDF: {
@@ -45,7 +45,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     quality: 1
                 },
                 html2canvas: {
-                    scale: 2, // A mayor escala, mejores gráficos, pero más peso
+                    scale: 10, // A mayor escala, mejores gráficos, pero más peso
                     letterRendering: true,
                 },
                 jsPDF: {
