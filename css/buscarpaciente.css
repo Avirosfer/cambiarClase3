@@ -83,6 +83,10 @@ header{
     justify-content: center;
 }
 
+.alinear-der{
+    justify-content: end;
+}
+
 .imagen1{
     float: center;
     width:  15rem;
@@ -262,7 +266,7 @@ header{
     width: 13.4rem;
     height: 4rem;
     color: var(--blanco);
-    background-color: var(--botones);
+    background-color: var(--hover);
     font-weight: normal;
     border: none;
     font-size: 1.8rem;
@@ -271,7 +275,9 @@ header{
 }
 
 .btn4 button:hover{
-    background: var(--hover);
+    background: var(--blanco);
+    color: var(--hover);
+    border: solid 0.2rem var(--hover);
 }
 
 .btn5 button{

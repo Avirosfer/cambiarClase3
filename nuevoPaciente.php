@@ -1,7 +1,6 @@
 
 <?php
 
-
     include 'conexion.php';
 
    $sentencia = $bd->query("SELECT * FROM pacientes;");
@@ -10,9 +9,7 @@
    $consulta = $bd->query("SELECT * FROM propietarios;");
    $resultados = $consulta->fetchall(PDO::FETCH_OBJ);
 
-
 ?>
-
 
 <!DOCTYPE html>
 <html lang="es">
@@ -48,7 +45,19 @@
 
 <form action="insertarPaciente.php" method="POST"> 
 
-
+                            <div class="flex alinear-der">
+                                                            
+                                    <form action="" method="POST">
+                                            <a href="formulariobuscarpaciente.php">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-circle-x" id="close-activar-pac" width="40" height="40" viewBox="0 0 24 24" stroke-width="2" stroke="#0D4251" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                                            <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                                                            <circle cx="12" cy="12" r="9" />
+                                                            <path d="M10 10l4 4m0 -4l-4 4" />
+                                                    </svg>
+                                            </a>
+                                    </form>
+                        
+                            </div>
                                            
                             <div class="fecha-vis-pac">
                                     <label>Fecha:</label>
@@ -61,8 +70,7 @@
                                     <div class="historiaclinica">
                                             <label>Historia Clínica</label><br>
                                             <input type="text" name="hisCli" value="">
-                                    </div>
-                                    
+                                    </div>  
 
                             </div>
 
@@ -78,13 +86,9 @@
 
                                                         <div class="contenedor-imagen flex">
 
-                                                                <form action="guardarFoto.php" method="POST" enctype="multipart/form-data">
-                                                                    <input REQUIRED type="file" name="foto"/>
-                                                                    <figure >
-                                                                        <img  class="fotoMascota" src="data:image/jpg;base64">
-                                                                    </figure>
-
-                                                                </form>
+                                                                <figure >
+                                                                    <img  class="fotoMascota" src="data:image/jpg;base64">
+                                                                </figure>
 
                                                         </div>
 
@@ -95,72 +99,20 @@
 
 
                                                         <div class="campo1">
-
                                                             <label>Especie:</label>
 
-                                                            <select class="selector" name="espPac" id="espPac">
-                                                            <option value="-1"></option>
-                                                                <?php        
-                                                                            
-                                                                            /*$sql = 'SELECT lisEsp FROM especie';*/
-                                                                            /*$sql = 'SELECT E.idEsp, E.lisEsp FROM especie E INNER JOIN raza R ON R.idEsp = R.idEsp ORDER BY E.lisEsp, R.lisRaza';
-                                                                            $stmt = $bd->prepare($sql);
-                                                                            $stmt->execute();
-                                                                            $results=$stmt->fetchAll();
-
-                                                                            foreach ($results as $output){?>
-                                                                            <option value="<?php echo $output['lisEsp']; ?> "><?php echo $output["lisEsp"];?></option>
-                                                                            <?php } */  
-
-                                                                            /*$sql = 'SELECT E.idEsp AS EspecieID, E.lisEsp AS EspecieList FROM especie E INNER JOIN raza R ON R.idEsp = R.idEsp ORDER BY E.lisEsp, R.lisRaza';
-                                                                            
-                                                                            try{
-                                                                                $data = $bd->query($sql)->fetchAll(PDO::FETCH_ASSOC);
-                                                                            }catch (PDOException $exception){
-                                                                                die($exception->getMessage());
-                                                                            }
-
-                                                                            $specieList = array_unique(array_column($data, 'EspecieList'));
-                                                                            $specieId = array_unique(array_column($data, 'EspecieID'));
-
-                                                                            foreach($specieList as $k => $listaEsp){
-                                                                                ?>
-
-                                                                                <option value="<?php echo $specieId[$k]; ?>"><?php echo $listaEsp; ?></option>
-
-                                                                                <?php
-
-                                                                            }
-                                                                        */
-
-                                                                        $sql = 'SELECT E.idEsp AS EspecieID, E.lisEsp AS EspecieList FROM especie E ORDER BY E.lisEsp';
-                                                                            
-                                                                            try{
-                                                                                $data = $bd->query($sql)->fetchAll(PDO::FETCH_ASSOC);
-                                                                            }catch (PDOException $exception){
-                                                                                die($exception->getMessage());
-                                                                            }
-
-                                                                            foreach ($data as $especie){?>
-                                                                                <option value="<?php echo $especie['EspecieID']; ?>"><?php echo $especie["EspecieList"];?></option>
-                                                                                <?php }
-
-                                                                ?>
+                                                            <select class="selector" name="espPac" id="espPac" >
+                                                                
                                                             </select>
+                                                        </div>
 
-                                                        </div>
                                                         <div class="campo1">
-                                                            
                                                                 <label>Raza:</label>
-                                                                <select class="selector" name="razPac" id="razPac"> </select>
-                                                                <script type="application/javascript">
-                                                                  
-                                                        
-                                                                           
-                                                                </script>
-                                                               
-                                                            
+                                                                <select class="selector" name="razPac" id="razPac">
+                                                                
+                                                                </select>
                                                         </div>
+
                                                         <div class="campo1">
 
                                                             <label>Sexo:</label>
@@ -168,7 +120,7 @@
                                                             <select class="selector" name="sexPac" id="sexPac">
                                                                 
                                                                 <?php
-                                                                        $sql = 'SELECT lisSex FROM sexo';
+                                                                        $sql = 'SELECT lisSex FROM sexo ORDER BY lisSex';
                                                                         $stmt = $bd->prepare($sql);
                                                                         $stmt->execute();
                                                                         $results=$stmt->fetchAll();
@@ -193,7 +145,7 @@
 
                                                                 <?php
 
-                                                                     $sql = 'SELECT lisCol FROM color';
+                                                                     $sql = 'SELECT lisCol FROM color ORDER BY lisCol';
                                                                         $stmt = $bd->prepare($sql);
                                                                         $stmt->execute();
                                                                         $results=$stmt->fetchAll();
@@ -211,11 +163,6 @@
                                                             <label>Última atención:</label>
                                                             <input class="input-text" type="date" name="ultAte" value="">
                                                         </div>
-
-                                                        <div class="">
-                                                            <input class="input-text" type="hidden" name="oculto" value="1">
-                                                        </div>
-                
                                                 
                                             </div> <!--Contenedor-infopaciente--> 
 

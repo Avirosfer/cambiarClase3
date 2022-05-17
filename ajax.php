@@ -24,7 +24,7 @@
             break;
 
         case "razPac":
-            $sql = 'SELECT R.idRaz AS RazaID, R.lisRaz AS RazaList FROM raza R WHERE idESp= ORDER BY R.lisRaz' . $idEsp;
+            $sql = 'SELECT R.idRaz AS RazaID, R.lisRaz AS RazaList FROM raza R WHERE idESp= ORDER BY R.lisRaz'.$idEsp;
                                                                             
             try{
                 $data = $bd->query($sql)->fetchAll(PDO::FETCH_ASSOC);

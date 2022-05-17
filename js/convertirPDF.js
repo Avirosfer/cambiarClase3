@@ -6,7 +6,7 @@ document.addEventListener("DOMContentLoaded", () => {
         /*const $elementoParaConvertir = document.getElementById('element-to-print-pro');  // <-- Aquí puedes elegir cualquier elemento del DOM*/
         html2pdf()
             .set({
-                margin: 1,
+                margin: -0.5,
                 filename: 'documento.pdf',
                 image: {
                     type: 'jpeg',

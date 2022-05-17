@@ -43,7 +43,11 @@
         border: solid 0.2rem #f6bc00;
         border-radius: 15px;
         }
+
+        th,td,p,div,b {margin:0;padding:0}
+        html{margin:10px 10px}
     </style>
+    
 </head>
 
 <body class="agrupar" >
@@ -52,7 +56,21 @@
 
 <!--------------3. POP UP "VISUALIZAR PACIENTE" - 3.1. CONTENEDOR MASCOTA----------------------------->
 
-    
+                            <div class="flex alinear-der">
+                                                            
+                                        <form action="" method="POST">
+                                                <a href="formulariobuscarpaciente.php">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-circle-x" id="close-activar-pac" width="40" height="40" viewBox="0 0 24 24" stroke-width="2" stroke="#0D4251" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                                            <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                                                                <circle cx="12" cy="12" r="9" />
+                                                                <path d="M10 10l4 4m0 -4l-4 4" />
+                                                        </svg>
+                                                </a>
+                                        </form>
+                        
+                            </div>
+
+
                             <form class="fechayhora">
                                            
                                     <div class="fecha-vis-pac">

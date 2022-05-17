@@ -255,37 +255,22 @@ $(document).ready(function (){
 });
 /* Finaliza Popup ventana emergente REPORTES.*/
 
-$(document).ready(function () {
 
-	$('#espPac').change(function() {
-		loadRaza($(this).find(':selected').val())
-	})
-});
+/*Inicia el selector de razas*/
 
-function loadEspecie(){
-	$.ajax({
-		type: "POST",
-		url: "ajax.php",
-		data: "get=lisEsp"
-	}).done(function(result){
-		$(result).each(function() {
-			$("#espPac").append($(result));
+$(document).ready(function() {
+	$('#espPac').load('./especies.php');
+	
+	$('#espPac').change(function(){
+		var idEsp = $('#espPac').value();
+		$.get("./razas.php",{param_id:idEsp})
+		.done(function(data){
+			$("#razPac").html(data);
 		})
-	});
 
-}
+	})
+})
 
-function loadRaza(idEsp){
-	$("#razPac").children().remove()
-	$.ajax({
-		type: "POST",
-		url: "ajax.php",
-		data: "get=lisRaz&idEsp="+ idEsp
-	}).done(function(result){
-		$("#razPac").append($(result));
-	});
-
-}
-
+/*Finaliza el selector de razas*/
 
 

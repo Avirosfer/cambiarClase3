@@ -4,7 +4,6 @@
         header('Location: formulariobuscarpaciente.php');
     }
 
-
     include 'conexion.php';
 
 //INFORMACIÓN ENVIADA POR EL FORMULARIO//

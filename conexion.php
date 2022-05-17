@@ -1,6 +1,6 @@
 <?php
    
-    $clave="";/*Rokuro800520649*/
+    $clave="Rokuro800520649";/*Rokuro800520649*/
     $user = "root";
     $basedts="vetpetsoft";
 
