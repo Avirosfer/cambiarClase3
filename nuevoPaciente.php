@@ -100,16 +100,13 @@
 
                                                         <div class="campo1">
                                                             <label>Especie:</label>
-
                                                             <select class="selector" name="espPac" id="espPac" >
-                                                                
                                                             </select>
                                                         </div>
 
                                                         <div class="campo1">
                                                                 <label>Raza:</label>
                                                                 <select class="selector" name="razPac" id="razPac">
-                                                                
                                                                 </select>
                                                         </div>
 
