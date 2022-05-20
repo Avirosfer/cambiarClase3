@@ -128,12 +128,11 @@ $registros = $sentencia->fetchall(PDO::FETCH_OBJ);
                                  </form>
 
                                  <div class="switch-button">
-                                     <!-- Checkbox -->
-                                     <input type="checkbox" name="switch-button"  id="switch-label" class="switch-button__checkbox">
-                                     <!-- Botón -->
-                                     <label for="switch-label" class="switch-button__label"></label>
-                                 </div>
-
+                                            <label class="switch">
+                                                <input type="checkbox">
+                                                <span class="slider round"></span>
+                                            </label>
+                                    </div>
 
                                  <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-circle-plus-pac" width="20" height="20" viewBox="0 0 24 24" stroke-width="1.5" stroke="#0D4251" fill="none" stroke-linecap="round" stroke-linejoin="round">
                                        <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
