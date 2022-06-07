@@ -71,7 +71,7 @@
                                            
                             <div class="fecha-vis-pac">
                                     <label>Fecha:</label>
-                                    <input class="input-date" type="date" value="<?php echo date('Y-m-d');?>">
+                                    <input class="input-date" type="date" value="<?php $fecha = new DateTime('now', new DateTimeZone('America/Bogota'));echo date('Y-m-d');?>">
                             </div>        
                                         
 

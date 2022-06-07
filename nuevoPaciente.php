@@ -43,8 +43,6 @@
 
 <body class="agrupar">
 
-<form action="insertarPaciente.php" method="POST"> 
-
                             <div class="flex alinear-der">
                                                             
                                     <form action="" method="POST">
@@ -61,9 +59,8 @@
                                            
                             <div class="fecha-vis-pac">
                                     <label>Fecha:</label>
-                                    <input class="input-date" type="date" value="<?php echo date('Y-m-d');?>">
-                            </div>        
-                                        
+                                    <input class="input-date" type="date" value="<?php $fecha = new DateTime('now', new DateTimeZone('America/Bogota'));echo date('Y-m-d');?>">
+                            </div>                                          
 
                             <div class="contenedorhc">
                 
@@ -73,6 +70,8 @@
                                     </div>  
 
                             </div>
+                            
+<form action="insertarPaciente.php" method="POST" enctype="multipart/form-data">
 
                             <div class="paciente-vis-pac">
 
@@ -87,7 +86,8 @@
                                                         <div class="contenedor-imagen flex">
 
                                                                 <figure >
-                                                                    <img  class="fotoMascota" src="data:image/jpg;base64">
+                                                                    <input type="text" name="nombre" placeholder="Nombre..." value=""/>
+                                                                    <input type="file" name="fotPac" />
                                                                 </figure>
 
                                                         </div>
@@ -237,6 +237,7 @@
                                         <div class="contenedor-btns-new-pac">
 
                                                     <div class="btn2">
+                                                        <input class="input-text" type="hidden" name="oculto" value="1">
                                                         <button type="submit" id="crearPaciente">Guardar</button>
                                                     </div>
                                                
