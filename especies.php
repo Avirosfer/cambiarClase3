@@ -1,16 +1,13 @@
 <?php
 
-include 'conexion.php';
+require_once 'conexion.php';
 
-$sql = 'SELECT E.idEsp AS EspecieID, E.lisEsp AS EspecieList FROM especie E ORDER BY E.lisEsp';
-                                                                            
-            try{
-                $data = $bd->query($sql)->fetchAll(PDO::FETCH_ASSOC);
-            }catch (PDOException $exception){
-                die($exception->getMessage());
-            }
+    $sentencia = "SELECT idEsp, lisEsp FROM especie ORDER BY lisEsp";
+    $registro = $mysqli->query($sentencia) or die (mysqli_error($mysqli));
+       
+        while($especie = $registro->fetch_assoc()) { ?>
+        
+             <option value="<?php echo $especie['idEsp']; ?>"><?php echo $especie['lisEsp']; ?></option>
 
-            foreach ($data as $especie){?>
-                <option value="<?php echo $especie['EspecieID']; ?>"><?php echo $especie["EspecieList"];?></option>
-                <?php }
+        <?php }
 ?>

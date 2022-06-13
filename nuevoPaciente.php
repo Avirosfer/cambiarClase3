@@ -1,13 +1,13 @@
 
 <?php
 
-    include 'conexion.php';
+require_once 'conexion.php';
 
-   $sentencia = $bd->query("SELECT * FROM pacientes;");
-   $registros = $sentencia->fetchall(PDO::FETCH_OBJ);
+$sentencia = "SELECT * FROM pacientes";
+$registro = $mysqli->query($sentencia);
 
-   $consulta = $bd->query("SELECT * FROM propietarios;");
-   $resultados = $consulta->fetchall(PDO::FETCH_OBJ);
+$consulta = "SELECT * FROM propietarios";
+$resultado = $mysqli->query($consulta);
 
 ?>
 
@@ -101,29 +101,43 @@
                                                         <div class="campo1">
                                                             <label>Especie:</label>
                                                             <select class="selector" name="espPac" id="espPac" >
+                                                            <option value = "-1" disabled="disabled">Seleccionar especie</option>
+
+                                                            <?php
+                                                                    require_once 'conexion.php';
+
+                                                                    $sentencia = "SELECT idEsp, lisEsp FROM especie ORDER BY lisEsp";
+                                                                    $registro = $mysqli->query($sentencia) or die (mysqli_error($mysqli));
+                                                                    
+                                                                    while($especie = $registro->fetch_assoc()) { ?>
+                                                                    <option value="<?php echo $especie['idEsp']; ?>"><?php echo $especie['lisEsp']; ?></option>
+                                                                    <?php }
+                                                            ?>
+                                                                    
                                                             </select>
                                                         </div>
 
                                                         <div class="campo1">
-                                                                <label>Raza:</label>
-                                                                <select class="selector" name="razPac" id="razPac">
-                                                                </select>
+                                                             <label>Raza:</label>
+                                                             <select class="selector" name="razPac" id="razPac">
+                                                             
+                                                             </select>
                                                         </div>
 
                                                         <div class="campo1">
 
                                                             <label>Sexo:</label>
-
                                                             <select class="selector" name="sexPac" id="sexPac">
+                                                            <option value = "-1" disabled="disabled">Seleccionar sexo</option>
                                                                 
                                                                 <?php
-                                                                        $sql = 'SELECT lisSex FROM sexo ORDER BY lisSex';
-                                                                        $stmt = $bd->prepare($sql);
-                                                                        $stmt->execute();
-                                                                        $results=$stmt->fetchAll();
-                                                                        
-                                                                        foreach ($results as $output){?>
-                                                                        <option value="<?php echo $output['lisSex']; ?> "> <?php echo $output["lisSex"];?></option>
+                                                                        require_once 'conexion.php';
+
+                                                                        $sentencia = "SELECT idSexo, lisSex FROM sexo ORDER BY lisSex";
+                                                                        $registro = $mysqli->query($sentencia) or die (mysqli_error($mysqli));
+                                                                    
+                                                                        while ($output=$registro->fetch_assoc()){?>
+                                                                        <option value="<?php echo $output['idSexo']; ?> "> <?php echo $output["lisSex"];?></option>
                                                                         <?php }    
                                                                 ?>
 
@@ -131,24 +145,23 @@
                                                         </div>
                                                         <div class="campo1">
                                                             <label>Fecha de Nacimiento:</label>
-                                                            <input class="input-text" type="date" name="fecNam" >
+                                                            <input class="input-text" type="date" name="fecNam" id="fecNam">
                                                         </div>
 
                                                         <div class="campo1">
 
                                                             <label>Color:</label>
-
                                                             <select class="selector" name="colPac" id="colSel" >
+                                                            <option value = "-1" disabled="disabled">Seleccionar color</option>
 
                                                                 <?php
+                                                                        require_once 'conexion.php';
 
-                                                                     $sql = 'SELECT lisCol FROM color ORDER BY lisCol';
-                                                                        $stmt = $bd->prepare($sql);
-                                                                        $stmt->execute();
-                                                                        $results=$stmt->fetchAll();
-                                                                        
-                                                                        foreach ($results as $output){?>
-                                                                        <option value="<?php echo $output['lisCol']; ?> "><?php echo $output["lisCol"];?></option>
+                                                                        $sentencia = "SELECT idCol, lisCol FROM color ORDER BY lisCol";
+                                                                        $registro = $mysqli->query($sentencia) or die (mysqli_error($mysqli));
+                                                                   
+                                                                        while ($output=$registro->fetch_assoc()){?>
+                                                                       <option value="<?php echo $output['idCol']; ?> "> <?php echo $output["lisCol"];?></option>
                                                                         <?php } 
 
                                                                 ?>
@@ -158,7 +171,7 @@
                                                         </div>
                                                         <div class="campo1">
                                                             <label>Última atención:</label>
-                                                            <input class="input-text" type="date" name="ultAte" value="">
+                                                            <input class="input-text" type="date" name="ultAte" id="ultAte" value="">
                                                         </div>
                                                 
                                             </div> <!--Contenedor-infopaciente--> 

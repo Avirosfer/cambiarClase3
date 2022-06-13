@@ -105,6 +105,7 @@ $(document).ready(function (){
 	function showAlertEditar(){
 		$('.alert-editar-pop-up').addClass('show');
 		$('.alert-editar-pop-wrap').addClass('show');
+
 	}	
 
 	$("#close-alert-editar").click(function(){
@@ -259,17 +260,17 @@ $(document).ready(function (){
 /*Inicia el selector de razas*/
 
 $(document).ready(function() {
-	$('#espPac').load('./especies.php');
-	
 	$('#espPac').change(function(){
-		var idEsp = $('#espPac').value();
-		$.get("./razas.php",{param_id:idEsp})
-		.done(function(data){
-			$("#razPac").html(data);
-		})
 
+		$("#espPac option:selected").each(function (){
+			idEsp = $(this).val();
+			$.post("./razas.php", { idEsp: idEsp }, function(data){
+				$("#razPac").html(data)
+			});
+		});		
+					
 	})
-})
+});
 
 /*Finaliza el selector de razas*/
 

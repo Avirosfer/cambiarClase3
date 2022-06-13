@@ -1,9 +1,10 @@
 
 <?php
 
-include 'conexion.php';
-$sentencia = $bd->query("SELECT * FROM pacientes;");
-$registros = $sentencia->fetchall(PDO::FETCH_OBJ);
+require_once 'conexion.php';
+
+$sentencia = "SELECT * FROM pacientes";
+$registros = $mysqli->query($sentencia) or die (mysqli_error($mysqli));
 
 ?>
 
@@ -89,23 +90,23 @@ $registros = $sentencia->fetchall(PDO::FETCH_OBJ);
                  </tr>
 
                  <?php
-                     foreach ($registros as $dato) { ?>
+                     while ($dato=$registros->fetch_assoc()) { ?>
 
                          <tr class="fila"><!--fila-->
-                              <td name="tdHistoria"><?php echo $dato->hisCli; ?></td><!--columna-->
-                              <td name="tdNombre"><?php echo $dato->nomPac; ?></td><!--columna-->
-                              <td name="tdSexo"><?php echo $dato->sexPac; ?></td><!--columna-->
-                              <td name="tdEspecie"><?php echo $dato->espPac; ?></td><!--columna-->
-                              <td name="tdRaza"><?php echo $dato->razPac; ?></td><!--columna-->
-                              <td name="tdUltAtencion"><?php echo $dato->ultAte; ?></td><!--columna-->
-                              <td name="tdPropietario"><?php echo $dato->proPac; ?></td><!--columna-->
-                              <td name="tdObservaciones"><?php echo $dato->obsPac; ?></td><!--columna-->
+                              <td name="tdHistoria"><?php echo $dato['hisCli']; ?></td><!--columna-->
+                              <td name="tdNombre"><?php echo $dato['nomPac']; ?></td><!--columna-->
+                              <td name="tdSexo"><?php echo $dato['sexPac']; ?></td><!--columna-->
+                              <td name="tdEspecie"><?php echo $dato['espPac']; ?></td><!--columna-->
+                              <td name="tdRaza"><?php echo $dato['razPac']; ?></td><!--columna-->
+                              <td name="tdUltAtencion"><?php echo $dato['ultAte']; ?></td><!--columna-->
+                              <td name="tdPropietario"><?php echo $dato['proPac']; ?></td><!--columna-->
+                              <td name="tdObservaciones"><?php echo $dato['obsPac']; ?></td><!--columna-->
                               <td name="tdAcciones" class="contenedor-acciones">
                               <input type="hidden" name="oculto" value="1">
 
                                  <form action="" method="POST">
 
-                                     <a href="visualizarPaciente.php?hisCli=<?php echo $dato->hisCli;?>">
+                                     <a href="visualizarPaciente.php?hisCli=<?php echo $dato['hisCli'];?>">
 
                                          <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-eye-pac" width="20" height="20" viewBox="0 0 24 24" stroke-width="1.5" stroke="#0D4251" fill="none" stroke-linecap="round" stroke-linejoin="round">
                                                <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
@@ -117,7 +118,7 @@ $registros = $sentencia->fetchall(PDO::FETCH_OBJ);
 
                                  </form>
 
-                                 <form action="" method="POST">
+                                 <form action="" method="GET">
 
                                          <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-pencil-pac" width="20" height="20" viewBox="0 0 24 24" stroke-width="1.5" stroke="#0D4251" fill="none" stroke-linecap="round" stroke-linejoin="round">
                                                <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
@@ -174,11 +175,11 @@ $registros = $sentencia->fetchall(PDO::FETCH_OBJ);
 
                      <div class="contenedor-inactivar-pac-btns">
 
-                             <form action="editarPaciente.php?hisCli=<?php echo $dato->hisCli;?>" method="POST">
+                             <form action="editarPaciente.php?hisCli=<?php echo $dato['hisCli'];?>" method="POST">
 
                                      <div class="btn5">
 
-                                              <button type="submit" class="siEditar">Sí</button>
+                                            <button type="submit" class="siEditar" >Sí</button>
 
                                      </div>
 
@@ -325,23 +326,28 @@ $registros = $sentencia->fetchall(PDO::FETCH_OBJ);
         </tr>
 
         <?php
-            foreach ($registros as $dato) { ?>
+
+            require_once 'conexion.php';
+
+            $sentencia = "SELECT * FROM pacientes";
+             $registros = $mysqli->query($sentencia) or die (mysqli_error($mysqli));
+             while ($dato=$registros->fetch_assoc()) { ?>
 
                 <tr class="fila"><!--fila-->
-                    <td name="tdHistoria"><?php echo $dato->hisCli; ?></td><!--columna-->
-                    <td name="tdNombre"><?php echo $dato->nomPac; ?></td><!--columna-->
-                    <td name="tdSexo"><?php echo $dato->sexPac; ?></td><!--columna-->
-                    <td name="tdEspecie"><?php echo $dato->espPac; ?></td><!--columna-->
-                    <td name="tdRaza"><?php echo $dato->razPac; ?></td><!--columna-->
-                    <td name="tdUltAtencion"><?php echo $dato->ultAte; ?></td><!--columna-->
-                    <td name="tdPropietario"><?php echo $dato->proPac; ?></td><!--columna-->
-                    <td name="tdObservaciones"><?php echo $dato->obsPac; ?></td><!--columna-->
+                    <td name="tdHistoria"><?php echo $dato['hisCli']; ?></td><!--columna-->
+                    <td name="tdNombre"><?php echo $dato['nomPac']; ?></td><!--columna-->
+                    <td name="tdSexo"><?php echo $dato['sexPac']; ?></td><!--columna-->
+                    <td name="tdEspecie"><?php echo $dato['espPac']; ?></td><!--columna-->
+                    <td name="tdRaza"><?php echo $dato['razPac']; ?></td><!--columna-->
+                    <td name="tdUltAtencion"><?php echo $dato['ultAte']; ?></td><!--columna-->
+                    <td name="tdPropietario"><?php echo $dato['proPac']; ?></td><!--columna-->
+                    <td name="tdObservaciones"><?php echo $dato['obsPac']; ?></td><!--columna-->
                     <td name="tdAcciones" class="contenedor-acciones">
                     <input type="hidden" name="oculto" value="1">
 
                         <form action="" method="POST">
 
-                            <a href="visualizarPaciente.php?hisCli=<?php echo $dato->hisCli;?>">
+                            <a href="visualizarPaciente.php?hisCli=<?php echo $data['hisCli'];?>">
 
                                 <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-eye-pac" width="20" height="20" viewBox="0 0 24 24" stroke-width="1.5" stroke="#0D4251" fill="none" stroke-linecap="round" stroke-linejoin="round">
                                     <path stroke="none" d="M0 0h24v24H0z" fill="none"/>

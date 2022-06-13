@@ -1,20 +1,18 @@
 <?php
 
-    include 'conexion.php';
+    require_once 'conexion.php';
 
     $hisCli = $_GET['hisCli'];
 
-    $sentencia = $bd->prepare("SELECT * FROM pacientes WHERE hisCli = ?;");
-    $sentencia->execute([$hisCli]);
-    $registro = $sentencia->fetch(PDO::FETCH_OBJ);
+    $sentencia = "SELECT * FROM pacientes WHERE hisCli='".$hisCli."' ";
+    $registro = $mysqli->query($sentencia) or die (mysqli_error($mysqli));
+    $dato=$registro->fetch_assoc();
 
-
-    $query = $bd->prepare("SELECT * FROM propietarios WHERE hisCli = ?;");
-    $query->execute([$hisCli]);
-    $register = $query->fetch(PDO::FETCH_OBJ);
+    $query = "SELECT * FROM propietarios WHERE hisCli='".$hisCli."' ";
+    $register = $mysqli->query($query) or die (mysqli_error($mysqli));
+    $data=$register->fetch_assoc();
 
 ?>
-
 
 <!DOCTYPE html>
 <html lang="es">
@@ -77,7 +75,7 @@
                                            
                                     <div class="fecha-vis-pac">
                                             <label>Fecha:</label>
-                                            <input class="input-date" type="date" value="<?php echo date("Y-m-d");?>" readonly>
+                                            <input class="input-date" type="date" value="<?php $fecha = new DateTime('now', new DateTimeZone('America/Bogota'));echo date('Y-m-d');?>" readonly>
                                     </div>        
                                         
                             </form> 
@@ -89,7 +87,7 @@
                                     <form class="historiaclinica">
                                             <div>
                                                 <label>Historia Clínica</label><br>
-                                                <input type="" name="visHistoria" value="<?php echo $registro->hisCli;  ?>" readonly>
+                                                <input type="" name="visHistoria" value="<?php echo $dato['hisCli'];  ?>" readonly>
                                             </div>
                                     </form>
 
@@ -111,39 +109,39 @@
                                                         <div class="contenedor-imagen flex">
 
                                                                 <figure >
-                                                                    <img  class="fotoMascota" src="data:image/jpg;base64,<?php echo base64_encode($registro->fotPac); ?>" readonly>
+                                                                    <img  class="fotoMascota" src="data:image/jpg;base64,<?php echo base64_encode($dato['fotPac']); ?>" readonly>
                                                                 </figure>
 
                                                         </div>
 
                                                         <div class="campo1">
                                                             <label>Nombre:</label>
-                                                            <input class="input-text" type="text" name="visNombre" value="<?php echo $registro->nomPac;  ?>" readonly>
+                                                            <input class="input-text" type="text" name="visNombre" value="<?php echo $dato['nomPac'];  ?>" readonly>
                                                         </div>
 
                                                         <div class="campo1">
                                                             <label>Especie:</label>
-                                                            <input class="input-text" type="text" name="visEspecie" value="<?php echo $registro->espPac;  ?>" readonly>
+                                                            <input class="input-text" type="text" name="visEspecie" value="<?php echo $dato['espPac'];  ?>" readonly>
                                                         </div>
                                                         <div class="campo1">
                                                             <label>Raza:</label>
-                                                            <input class="input-text" type="text" name="visRaza" value="<?php echo $registro->razPac;  ?>" readonly>
+                                                            <input class="input-text" type="text" name="visRaza" value="<?php echo $dato['razPac'];  ?>" readonly>
                                                         </div>
                                                         <div class="campo1">
                                                             <label>Sexo:</label>
-                                                            <input class="input-text" type="text" name="sexo" value="<?php echo $registro->sexPac;  ?>" readonly>
+                                                            <input class="input-text" type="text" name="sexo" value="<?php echo $dato['sexPac'];  ?>" readonly>
                                                         </div>
                                                         <div class="campo1">
                                                             <label>Fecha de Nacimiento:</label>
-                                                            <input class="input-text" type="date" name="visNacimiento" value="<?php echo $registro->fecNam;  ?>" readonly>
+                                                            <input class="input-text" type="date" name="visNacimiento" value="<?php echo $dato['fecNam'];  ?>" readonly>
                                                         </div>
                                                         <div class="campo1">
                                                             <label>Color:</label>
-                                                            <input class="input-text" type="text" name="visColor" value="<?php echo $registro->colPac;  ?>" readonly>
+                                                            <input class="input-text" type="text" name="visColor" value="<?php echo $dato['colPac'];  ?>" readonly>
                                                         </div>
                                                         <div class="campo1">
                                                             <label>Última atención:</label>
-                                                            <input class="input-text" type="date" name="visUltAtencion" value="<?php echo $registro->ultAte;  ?>" readonly>
+                                                            <input class="input-text" type="date" name="visUltAtencion" value="<?php echo $dato['ultAte'];  ?>" readonly>
                                                         </div>
 
                                                 
@@ -170,42 +168,42 @@
 
                                                             <div class="campo2">
                                                                 <label>Nombres:</label>
-                                                                <input class="input-text" type="text" placeholder="" value="<?php echo $register->nomPro;  ?>" readonly>
+                                                                <input class="input-text" type="text" placeholder="" value="<?php echo $data['nomPro'];  ?>" readonly>
                                                             </div>
 
                                                             <div class="campo2">
                                                                 <label>Apellidos:</label>
-                                                                <input class="input-text" type="text" placeholder="" value="<?php echo $register->apePro;  ?>" readonly>
+                                                                <input class="input-text" type="text" placeholder="" value="<?php echo $data['apePro'];  ?>" readonly>
                                                             </div>
 
                                                             <div class="campo2">
                                                                 <label>Tipo de documento:</label>
-                                                                <input class="input-text" type="text" placeholder=" "value="<?php echo $register->tipDoc;  ?>" readonly>
+                                                                <input class="input-text" type="text" placeholder=" "value="<?php echo $data['tipDoc'];  ?>" readonly>
                                                             </div>
 
                                                             <div class="campo2">
                                                                 <label>Número de documento:</label>
-                                                                <input class="input-text" type="text" placeholder="" value="<?php echo $register->docPro;  ?>" readonly>
+                                                                <input class="input-text" type="text" placeholder="" value="<?php echo $data['docPro'];  ?>" readonly>
                                                             </div>
 
                                                             <div class="campo2">
                                                                 <label>Dirección:</label>
-                                                                <input class="input-text" type="text" placeholder="" value="<?php echo $register->dirPro;  ?>" readonly>
+                                                                <input class="input-text" type="text" placeholder="" value="<?php echo $data['dirPro'];  ?>" readonly>
                                                             </div>
 
                                                             <div class="campo2">
                                                                 <label>Municipio:</label>
-                                                                <input class="input-text" type="text" placeholder="" value="<?php echo $register->munPro;  ?>" readonly>
+                                                                <input class="input-text" type="text" placeholder="" value="<?php echo $data['munPro'];  ?>" readonly>
                                                             </div>
 
                                                             <div class="campo2">
                                                                 <label>Celular:</label>
-                                                                <input class="input-text" type="text" placeholder="" value="<?php echo $register->celPro;  ?>" readonly>
+                                                                <input class="input-text" type="text" placeholder="" value="<?php echo $data['celPro'];  ?>" readonly>
                                                             </div>
 
                                                             <div class="campo2">
                                                                 <label>E-mail:</label>
-                                                                <input class="input-text" type="text" placeholder="" value="<?php echo $register->emaPro;  ?>" readonly>
+                                                                <input class="input-text" type="text" placeholder="" value="<?php echo $data['emaPro'];  ?>" readonly>
                                                             </div>
                                                             
                                                         </div> <!--contenedor-infopropietario-->

@@ -1,22 +1,16 @@
 <?php
 
-   if(!isset($_GET['hisCli'])){
-        header('Location:formulariobuscarpaciente.php');
-        exit();
-    }
-
-    include 'conexion.php';
+    require_once 'conexion.php';
 
     $hisCli = $_GET['hisCli'];
 
-    $sentencia = $bd->prepare("SELECT * FROM pacientes WHERE hisCli = ?;");
-    $sentencia->execute([$hisCli]);
-    $registro = $sentencia->fetch(PDO::FETCH_OBJ);
+    $sentencia = "SELECT * FROM pacientes WHERE hisCli='".$hisCli."' ";
+    $registro = $mysqli->query($sentencia) or die (mysqli_error($mysqli));
+    $dato=$registro->fetch_assoc();
 
-
-    $query = $bd->prepare("SELECT * FROM propietarios WHERE hisCli = ?;");
-    $query->execute([$hisCli]);
-    $register = $query->fetch(PDO::FETCH_OBJ);
+    $query = "SELECT * FROM propietarios WHERE hisCli='".$hisCli."' ";
+    $register = $mysqli->query($query) or die (mysqli_error($mysqli));
+    $data=$register->fetch_assoc();
 
 ?>
 
@@ -79,7 +73,7 @@
                 
                                     <div class="historiaclinica">
                                             <label>Historia Clínica</label><br>
-                                            <input type="text" name="hisCli" value="<?php echo $registro->hisCli;  ?>">
+                                            <input type="text" name="ediHistoria" value="<?php echo $dato['hisCli'];  ?>">
                                     </div>
                                     
 
@@ -99,39 +93,39 @@
                                                         <div class="contenedor-imagen flex">
 
                                                                 <figure >
-                                                                     <img  class="fotoMascota" src="data:image/jpg;base64,<?php echo base64_encode($registro->fotPac); ?>">
+                                                                     <img  class="fotoMascota" src="data:image/jpg;base64,<?php echo base64_encode($dato['fotPac']); ?>">
                                                                 </figure>
 
                                                         </div>
 
                                                         <div class="campo1">
                                                             <label>Nombre:</label>
-                                                            <input class="input-text" type="text" name="nomPac" id="pacNom" value="<?php echo $registro->nomPac;  ?>" autofocus>
+                                                            <input class="input-text" type="text" name="nomPac" id="pacNom" value="<?php echo $dato['nomPac'];  ?>" autofocus>
                                                         </div>
 
                                                         <div class="campo1">
                                                             <label>Especie:</label>
-                                                            <input class="input-text" type="text" name="espPac" value="<?php echo $registro->espPac;  ?>">
+                                                            <input class="input-text" type="text" name="espPac" value="<?php echo $dato['espPac'];  ?>">
                                                         </div>
                                                         <div class="campo1">
                                                             <label>Raza:</label>
-                                                            <input class="input-text" type="text" name="razPac" value="<?php echo $registro->razPac;  ?>">
+                                                            <input class="input-text" type="text" name="razPac" value="<?php echo $dato['razPac'];  ?>">
                                                         </div>
                                                         <div class="campo1">
                                                             <label>Sexo:</label>
-                                                            <input class="input-text" type="text" name="sexPac" value="<?php echo $registro->sexPac;  ?>">
+                                                            <input class="input-text" type="text" name="sexPac" value="<?php echo $dato['sexPac'];  ?>">
                                                         </div>
                                                         <div class="campo1">
                                                             <label>Fecha de Nacimiento:</label>
-                                                            <input class="input-text" type="date" name="fecNam" value="<?php echo $registro->fecNam;  ?>">
+                                                            <input class="input-text" type="date" name="fecNam" value="<?php echo $dato['fecNam'];  ?>">
                                                         </div>
                                                         <div class="campo1">
                                                             <label>Color:</label>
-                                                            <input class="input-text" type="text" name="colPac" value="<?php echo $registro->colPac;  ?>">
+                                                            <input class="input-text" type="text" name="colPac" value="<?php echo $dato['colPac'];  ?>">
                                                         </div>
                                                         <div class="campo1">
                                                             <label>Última atención:</label>
-                                                            <input class="input-text" type="date" name="ultAte" value="<?php echo $registro->ultAte;  ?>">
+                                                            <input class="input-text" type="date" name="ultAte" value="<?php echo $dato['ultAte'];  ?>">
                                                         </div>
 
                                                 
@@ -153,42 +147,42 @@
 
                                                             <div class="campo2">
                                                                 <label>Nombres:</label>
-                                                                <input class="input-text" type="text" name="nomPro" value="<?php echo $register->nomPro;  ?>">
+                                                                <input class="input-text" type="text" name="nomPro" value="<?php echo $data['nomPro'];  ?>">
                                                             </div>
 
                                                             <div class="campo2">
                                                                 <label>Apellidos:</label>
-                                                                <input class="input-text" type="text" name="apePro" value="<?php echo $register->apePro;  ?>">
+                                                                <input class="input-text" type="text" name="apePro" value="<?php echo $data['apePro'];  ?>">
                                                             </div>
 
                                                             <div class="campo2">
                                                                 <label>Tipo de documento:</label>
-                                                                <input class="input-text" type="text" name="tipDoc" value="<?php echo $register->tipDoc;  ?>">
+                                                                <input class="input-text" type="text" name="tipDoc" value="<?php echo $data['tipDoc'];  ?>">
                                                             </div>
 
                                                             <div class="campo2">
                                                                 <label>Número de documento:</label>
-                                                                <input class="input-text" type="text" name="docPro"value="<?php echo $register->docPro;  ?>">
+                                                                <input class="input-text" type="text" name="docPro"value="<?php echo $data['docPro'];  ?>">
                                                             </div>
 
                                                             <div class="campo2">
                                                                 <label>Dirección:</label>
-                                                                <input class="input-text" type="text" name="dirPro" value="<?php echo $register->dirPro;  ?>">
+                                                                <input class="input-text" type="text" name="dirPro" value="<?php echo $data['dirPro'];  ?>">
                                                             </div>
 
                                                             <div class="campo2">
                                                                 <label>Municipio:</label>
-                                                                <input class="input-text" type="text" name="munPro" value="<?php echo $register->munPro;  ?>">
+                                                                <input class="input-text" type="text" name="munPro" value="<?php echo $data['munPro'];  ?>">
                                                             </div>
 
                                                             <div class="campo2">
                                                                 <label>Celular:</label>
-                                                                <input class="input-text" type="text" name="celPro" value="<?php echo $register->celPro;  ?>">
+                                                                <input class="input-text" type="text" name="celPro" value="<?php echo $data['celPro'];  ?>">
                                                             </div>
 
                                                             <div class="campo2">
                                                                 <label>E-mail:</label>
-                                                                <input class="input-text" type="text" name="emaPro" value="<?php echo $register->emaPro;  ?>">
+                                                                <input class="input-text" type="text" name="emaPro" value="<?php echo $data['emaPro'];  ?>">
                                                             </div>
                                                             
                                                         </div> <!--contenedor-infopropietario-->
@@ -213,8 +207,8 @@
                                                 
                                                     <div class="btn2">
                                                         <input class="input-text" type="hidden" name="oculto" value="1">
-                                                        <input type="hidden" name= "hisCli2" value="<?php echo $registro->hisCli;  ?>">
-                                                        <input type="hidden" name= "hisCli3" value="<?php echo $register->hisCli;  ?>">
+                                                        <input type="hidden" name= "hisCli2" value="<?php echo $dato['hisCli'];  ?>">
+                                                        <input type="hidden" name= "hisCli3" value="<?php echo $data['hisCli'];  ?>">
                                                         <button type="submit" id="guardarEdit">Guardar</button>
                                                     </div>
                                                

@@ -1,19 +1,20 @@
 <?php
 
-include 'conexion.php';
 
-$idEspecie = $_GET['param_id'];
+require_once 'conexion.php';
 
-$sql = 'SELECT R.idRaza AS RazaID, R.lisRaza AS RazaList FROM raza R WHERE idESp = $idEspecie';
-                                                                            
-            try{
-                $data = $bd->query($sql)->fetchAll(PDO::FETCH_ASSOC);
-            }catch (PDOException $exception){
-                die($exception->getMessage());
-            }
+$idEsp = $_POST['idEsp'];
 
-            foreach ($data as $raza){?>
-                <option value="<?php echo $raza['RazaID']; ?>"><?php echo $raza['RazaList'];?></option>
-                <?php }
+$sql = "SELECT idRaza, lisRaza FROM raza WHERE idEsp = '$idEsp' ORDER BY lisRaza ASC";
+$register = $mysqli->query($sql);
+
+$html = "<option value ='-1' disabled='disabled'>Seleccionar raza</option>";
+
+while($raza = $register->fetch_assoc()) 
+    {
+        $html = "<option value='".$raza['idRaza']."'>".$raza['lisRaza']."</option>";
+    }
+
+echo $html;
 
 ?>
